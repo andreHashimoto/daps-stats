@@ -41,13 +41,13 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
         ];
         console.log(data['results'][symbol]['user'])
         for (let row of data['results']['eth']['user']) {
-            worksheet.addRow({ts: row['timestamp'], eth: row['value']});
+            worksheet.addRow({ts: new Date(parseInt(row['timestamp']) * 1000), eth: row['value']});
         }
         for (let row of data['results']['eos']['user']) {
-            worksheet.addRow({ts: row['timestamp'], eos: row['value']});
+            worksheet.addRow({ts: new Date(parseInt(row['timestamp']) * 1000), eos: row['value']});
         }
         for (let row of data['results']['tron']['user']) {
-            worksheet.addRow({ts: row['timestamp'], tron: row['value']});
+            worksheet.addRow({ts: new Date(parseInt(row['timestamp']) * 1000), tron: row['value']});
         }
         sendWorkbook(workbook, res)
     });
