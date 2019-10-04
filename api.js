@@ -39,10 +39,10 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
             { header: 'TRON', key: 'tron', width: 22 }
         ];
         for (let i = 0; i < data['results']['eth']['user'].length; i++) {
-            worksheet.addRow({ts: new Date(parseInt(et['timestamp']) * 1000),
-                eth: data['results']['eth']['user'][i],
-                eos: data['results']['eos']['user'][i],
-                tron: data['results']['tron']['user'][i]});
+            worksheet.addRow({ts: new Date(parseInt(data['results']['eth']['user'][i]['timestamp']) * 1000),
+                eth: data['results']['eth']['user'][i]['value'],
+                eos: data['results']['eos']['user'][i]['value'],
+                tron: data['results']['tron']['user'][i]['value']});
         }
 
         sendWorkbook(workbook, res)
