@@ -38,15 +38,13 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
             { header: 'EOS', key: 'eos', width: 22 },
             { header: 'TRON', key: 'tron', width: 22 }
         ];
-        for (let et of data['results']['eth']['user']) {
-            worksheet.addRow({ts: new Date(parseInt(et['timestamp']) * 1000), eth: et['value']});
+        for (let i = 0; i < data['results']['eth']['user'].length; i++) {
+            worksheet.addRow({ts: new Date(parseInt(et['timestamp']) * 1000),
+                eth: data['results']['eth']['user'][i],
+                eos: data['results']['eos']['user'][i],
+                tron: data['results']['tron']['user'][i]});
         }
-        for (let eo of data['results']['eos']['user']) {
-            worksheet.addRow({ts: new Date(parseInt(eo['timestamp']) * 1000), eos: eo['value']});
-        }
-        for (let tr of data['results']['tron']['user']) {
-            worksheet.addRow({ts: new Date(parseInt(tr['timestamp']) * 1000), tr: row['value']});
-        }
+
         sendWorkbook(workbook, res)
     });
 })
