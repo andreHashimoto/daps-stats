@@ -26,7 +26,7 @@ app.get('/prices', function (req, res) {
 })
 
 app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-10-3
-    let {symbol, start, end} = req.query;
+    let {start, end} = req.query;
     axios.get(`https://api.dapp.review/api/stats/statsbychain/?start_date=${start}&end_date=${end}`).then(function (response) {
         let data = response.data;
         // console.log(data['results']['eth']['user'][0])
@@ -34,12 +34,20 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
         var workbook = new Excel.Workbook();
         var worksheet = workbook.addWorksheet('My Sheet');
         worksheet.columns = [
-            { header: 'Timestamp', key: 'ts', width: 32 },
-            { header: 'Users', key: 'user', width: 32 }
+            { header: 'Timestamp', key: 'ts', width: 22 },
+            { header: 'ETH', key: 'eth', width: 22 },
+            { header: 'EOS', key: 'eos', width: 22 },
+            { header: 'TRON', key: 'tron', width: 22 }
         ];
         console.log(data['results'][symbol]['user'])
-        for (let row of data['results'][symbol]['user']) {
-            worksheet.addRow({ts: row['timestamp'], user: row['value']});
+        for (let row of data['results']['eth']['user']) {
+            worksheet.addRow({ts: row['timestamp'], eth: row['value']});
+        }
+        for (let row of data['results']['eos']['user']) {
+            worksheet.addRow({ts: row['timestamp'], eos: row['value']});
+        }
+        for (let row of data['results']['tron']['user']) {
+            worksheet.addRow({ts: row['timestamp'], tron: row['value']});
         }
         sendWorkbook(workbook, res)
     });
