@@ -26,14 +26,12 @@ app.get('/dapp', function (req, res) { //start_date=2019-7-6&end_date=2019-10-3
                 tron: data['results']['tron'][info][i]['value']});
         }
 
-        sendWorkbook(workbook, res)
+        sendWorkbook(workbook, res, `dapps_${info}_${start}_${end}.xlsx`)
     });
 })
 
 
-function sendWorkbook(workbook, response) { 
-    var fileName = 'dapps.xlsx';
-
+function sendWorkbook(workbook, response, fileName) { 
     response.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 
