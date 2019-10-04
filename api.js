@@ -29,7 +29,6 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
     let {start, end} = req.query;
     axios.get(`https://api.dapp.review/api/stats/statsbychain/?start_date=${start}&end_date=${end}`).then(function (response) {
         let data = response.data;
-        // console.log(data['results']['eth']['user'][0])
         var Excel = require('exceljs');
         var workbook = new Excel.Workbook();
         var worksheet = workbook.addWorksheet('My Sheet');
@@ -39,15 +38,14 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
             { header: 'EOS', key: 'eos', width: 22 },
             { header: 'TRON', key: 'tron', width: 22 }
         ];
-        console.log(data['results'][symbol]['user'])
-        for (let row of data['results']['eth']['user']) {
-            worksheet.addRow({ts: new Date(parseInt(row['timestamp']) * 1000), eth: row['value']});
+        for (let et of data['results']['eth']['user']) {
+            worksheet.addRow({ts: new Date(parseInt(et['timestamp']) * 1000), eth: et['value']});
         }
-        for (let row of data['results']['eos']['user']) {
-            worksheet.addRow({ts: new Date(parseInt(row['timestamp']) * 1000), eos: row['value']});
+        for (let eo of data['results']['eos']['user']) {
+            worksheet.addRow({ts: new Date(parseInt(eo['timestamp']) * 1000), eos: eo['value']});
         }
-        for (let row of data['results']['tron']['user']) {
-            worksheet.addRow({ts: new Date(parseInt(row['timestamp']) * 1000), tron: row['value']});
+        for (let tr of data['results']['tron']['user']) {
+            worksheet.addRow({ts: new Date(parseInt(tr['timestamp']) * 1000), tr: row['value']});
         }
         sendWorkbook(workbook, res)
     });
@@ -55,7 +53,7 @@ app.get('/dapp-user', function (req, res) { //start_date=2019-7-6&end_date=2019-
 
 
 function sendWorkbook(workbook, response) { 
-    var fileName = 'FileName.xlsx';
+    var fileName = 'DappsUser.xlsx';
 
     response.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
