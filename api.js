@@ -20,7 +20,11 @@ app.get('/dapp', function (req, res) { //start_date=2019-7-6&end_date=2019-10-3
             { header: 'TRON', key: 'tron', width: 22 }
         ];
         for (let i = 0; i < data['results']['eth'][info].length; i++) {
-            worksheet.addRow({ts: new Date(parseInt(data['results']['eth'][info][i]['timestamp']) * 1000),
+            let date = new Date(parseInt(data['results']['eth'][info][i]['timestamp']) * 1000)
+            let day = date.getDate();
+            let monthIndex = date.getMonth();
+            let year = date.getFullYear();
+            worksheet.addRow({ts: `${day}/${monthIndex+1}/${year}`,
                 eth: data['results']['eth'][info][i]['value'],
                 eos: data['results']['eos'][info][i]['value'],
                 tron: data['results']['tron'][info][i]['value']});
