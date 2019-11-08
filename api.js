@@ -146,13 +146,13 @@ app.get('/volume-oi-cme', function (req, res) {
             { header: 'Date', key: 'd', width: 22 }
         ];
         for (const point of data['results']['A']['series'][0]['points']) {
-            worksheetOI.addRow({
+            worksheetDailyVolume.addRow({
                 v: point[0],
                 d: new Date(point[1]).toISOString()
             });
         }
         for (const point of data['results']['B']['series'][0]['points']) {
-            worksheetDailyVolume.addRow({
+            worksheetOI.addRow({
                 oi: point[0],
                 d: new Date(point[1]).toISOString()
             });
