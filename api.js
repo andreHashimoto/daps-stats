@@ -107,7 +107,7 @@ app.get('/liquidation', function (req, res) {
     });
 })
 
-app.get('/oi-daily-volume', function (req, res) {
+app.get('/volume-oi-cme', function (req, res) {
     let {from, to} = req.query;
     let reqBody = {
         "from": new Date(Date.parse(from)).getTime().toString(),
@@ -157,7 +157,7 @@ app.get('/oi-daily-volume', function (req, res) {
                 d: new Date(point[1]).toISOString()
             });
         }
-        sendWorkbook(workbook, res, `oi-daily-volume.xlsx`)
+        sendWorkbook(workbook, res, `volume-oi-cme.xlsx`)
     });
 })
 
