@@ -138,11 +138,11 @@ app.get('/volume-oi-cme', function (req, res) {
         var worksheetOI = workbook.addWorksheet('Open Interest');
         var worksheetDailyVolume = workbook.addWorksheet('Daily Volume');
         worksheetOI.columns = [
-            { header: 'Volume', key: 'v', width: 22 },
+            { header: 'Open Interest', key: 'oi', width: 22 },
             { header: 'Date', key: 'd', width: 22 }
         ];
         worksheetDailyVolume.columns = [
-            { header: 'Open Interest', key: 'oi', width: 22 },
+            { header: 'Volume', key: 'v', width: 22 },
             { header: 'Date', key: 'd', width: 22 }
         ];
         for (const point of data['results']['A']['series'][0]['points']) {
@@ -164,8 +164,6 @@ app.get('/volume-oi-cme', function (req, res) {
 
 app.get('/volume-oi-bitmex', function (req, res) {
     let {from, to} = req.query;
-    console.log(`From: ${new Date(Date.parse(from)).getTime()}`)
-    console.log(`To: ${new Date(Date.parse(to)).getTime()}`)
     let reqBody = {
         "from": new Date(Date.parse(from)).getTime().toString(),
         "to": new Date(Date.parse(to)).getTime().toString(),
