@@ -91,19 +91,19 @@ app.get('/liquidation', function (req, res) {
         for (const point of data['results']['A']['series'][0]['points']) {
             worksheetBuy.addRow({
                 b: point[0],
-                bd: new Date(point[1]).toUTCString()
+                bd: new Date(point[1]).toISOString()
             });
         }
         for (const point of data['results']['B']['series'][0]['points']) {
             worksheetSell.addRow({
                 s: point[0],
-                sd: new Date(point[1]).toUTCString()
+                sd: new Date(point[1]).toISOString()
             });
         }
         for (const point of data['results']['C']['series'][0]['points']) {
             worksheetHour.addRow({
                 hl: point[0],
-                hld: new Date(point[1]).toUTCString()
+                hld: new Date(point[1]).toISOString()
             });
         }
         sendWorkbook(workbook, res, `liquidation.xlsx`)
