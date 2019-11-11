@@ -36,6 +36,8 @@ app.get('/dapp', function (req, res) { //start_date=2019-7-6&end_date=2019-10-3
 
 app.get('/liquidation', function (req, res) {
     let {from, to} = req.query;
+    console.log(`From: ${new Date(Date.parse(from)).getTime()}`)
+    console.log(`To: ${new Date(Date.parse(to)).getTime()}`)
     let reqBody = {
         "from": new Date(Date.parse(from)).getTime().toString(),
         "to": new Date(Date.parse(to)).getTime().toString(),
@@ -109,6 +111,8 @@ app.get('/liquidation', function (req, res) {
 
 app.get('/volume-oi-cme', function (req, res) {
     let {from, to} = req.query;
+    console.log(`From: ${new Date(Date.parse(from)).getTime()}`)
+    console.log(`To: ${new Date(Date.parse(to)).getTime()}`)
     let reqBody = {
         "from": new Date(Date.parse(from)).getTime().toString(),
         "to": new Date(Date.parse(to)).getTime().toString(),
@@ -164,6 +168,8 @@ app.get('/volume-oi-cme', function (req, res) {
 
 app.get('/volume-oi-bitmex', function (req, res) {
     let {from, to} = req.query;
+    console.log(`From: ${new Date(Date.parse(from)).getTime()}`)
+    console.log(`To: ${new Date(Date.parse(to)).getTime()}`)
     let reqBody = {
         "from": new Date(Date.parse(from)).getTime().toString(),
         "to": new Date(Date.parse(to)).getTime().toString(),
