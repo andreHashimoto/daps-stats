@@ -70,7 +70,7 @@ app.get('/liquidation', function (req, res) {
      }
     axios.post(`https://www.skew.com/api/tsdb/query`, reqBody).then(function (response) {
         let data = response.data;
-        console.log(`Response: ${data}`)
+        console.log(`Response: ${JSON.stringify(data)}`)
         var Excel = require('exceljs');
         var workbook = new Excel.Workbook();
         var worksheetBuy = workbook.addWorksheet('Buy');
@@ -138,7 +138,7 @@ app.get('/volume-oi-cme', function (req, res) {
     }
     axios.post(`https://www.skew.com/api/tsdb/query`, reqBody).then(function (response) {
         let data = response.data;
-        console.log(`Response: ${data}`)
+        console.log(`Response: ${JSON.stringify(data)}`)
         var Excel = require('exceljs');
         var workbook = new Excel.Workbook();
         var worksheetOI = workbook.addWorksheet('Open Interest');
@@ -196,7 +196,7 @@ app.get('/volume-oi-bitmex', function (req, res) {
     }
     axios.post(`https://www.skew.com/api/tsdb/query`, reqBody).then(function (response) {
         let data = response.data;
-        console.log(`Response: ${data}`)
+        console.log(`Response: ${JSON.stringify(data)}`)
         var Excel = require('exceljs');
         var workbook = new Excel.Workbook();
         var worksheetBitmex = workbook.addWorksheet('Bitmex');
